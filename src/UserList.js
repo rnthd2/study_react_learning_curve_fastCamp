@@ -6,22 +6,7 @@ function User({user}){
         </div>
     )
 }
-function UserList(){
-    const users = [
-        {
-            id:1,
-            username : 'rnthd1',
-            email:'public1@gmail.com'
-        },{
-            id:2,
-            username : 'rnthd2',
-            email:'public2@gmail.com'
-        },{
-            id:3,
-            username : 'rnthd3',
-            email:'public3@gmail.com'
-        }
-    ];
+function UserList({users}){
     return (
         <div>
             {/* <div>

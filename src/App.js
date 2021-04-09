@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import UserList from './UserList';
 // import InputSample from './InputSample';
 // import Hello from './Hello';
@@ -7,9 +7,34 @@ import UserList from './UserList';
 // import './App.css';
 
 function App() {
-return (
-  <UserList />
-)
+  const users = [
+    {
+        id:1,
+        username : 'rnthd1',
+        email:'public1@gmail.com'
+    },{
+        id:2,
+        username : 'rnthd2',
+        email:'public2@gmail.com'
+    },{
+        id:3,
+        username : 'rnthd3',
+        email:'public3@gmail.com'
+    }
+  ];
+
+  //useState로 사용하는 경우 해당 값이 리랜더링 되는데 
+  //굳이 그럴 필요가 없을 때, useRef로 해도됨~
+  const nextId = useRef(4);
+
+  const onCreate = () => {
+    console.log(nextId.current);  //4
+    nextId.current += 1;  //컴포넌트가 리랜더링 되지 않는다
+  }
+
+  return (
+    <UserList users={users}/>
+  )
 
   // return (
   //   <InputSample />

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 function InputSample(){
     //객체로 
     const [inputs, setInputs] = useState({
@@ -6,6 +6,7 @@ function InputSample(){
         nickname: '',
     });
     //비구조 할당으로
+    const nameInput = useRef();
     const { name, nickname } = inputs;
     const onChange = (e) => {
         //e.target.name
@@ -44,6 +45,7 @@ function InputSample(){
             name:'',
             nickname:'',
         });
+        nameInput.current.focus();
     };
     return(
         <div>
@@ -52,6 +54,7 @@ function InputSample(){
                 placeholder="이름" 
                 onChange={onChange} 
                 value={name}
+                ref={nameInput}
                 />
             <input 
                 name="nickname" 

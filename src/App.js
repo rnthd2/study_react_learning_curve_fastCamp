@@ -1,5 +1,5 @@
 import React from 'react';
-import Hello from './Hello';
+// import Hello from './Hello';
 import Counter from './Counter';
 // import Wrapper from './Wrapper';
 // import './App.css';

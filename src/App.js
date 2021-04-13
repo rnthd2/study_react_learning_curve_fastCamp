@@ -1,4 +1,5 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
+import CreateUser from './CreateUser';
 import UserList from './UserList';
 // import InputSample from './InputSample';
 // import Hello from './Hello';
@@ -7,7 +8,20 @@ import UserList from './UserList';
 // import './App.css';
 
 function App() {
-  const users = [
+  const [inputs, setInputs] = useState({
+    username:'',
+    email:'',
+  });
+  const {username, email} = inputs;
+  const onChange = e =>{
+    const{name, value} = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value
+    });
+  }
+
+  const [users,setUsers] = useState([
     {
         id:1,
         username : 'rnthd1',
@@ -21,19 +35,47 @@ function App() {
         username : 'rnthd3',
         email:'public3@gmail.com'
     }
-  ];
+  ]);
+
+
 
   //useState로 사용하는 경우 해당 값이 리랜더링 되는데 
   //굳이 그럴 필요가 없을 때, useRef로 해도됨~
   const nextId = useRef(4);
 
   const onCreate = () => {
+
+    const user = {
+      id: nextId.current,
+      ...inputs
+      //username, email
+    };
+
+    //배열에서 spread 연산자를 사용해보자
+    // setUsers([
+    //   ...users, 
+    //   user
+    // ]);
+    setUsers(users.concat(user));
+     
+    setInputs({
+      username: '',
+      email:'',
+    }); 
     console.log(nextId.current);  //4
     nextId.current += 1;  //컴포넌트가 리랜더링 되지 않는다
   }
 
   return (
+    <>
+    <CreateUser 
+      username={username} 
+      email={email} 
+      onChange={onChange} 
+      onCreate={onCreate}
+    />
     <UserList users={users}/>
+    </>
   )
 
   // return (

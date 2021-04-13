@@ -25,15 +25,18 @@ function App() {
     {
         id:1,
         username : 'rnthd1',
-        email:'public1@gmail.com'
+        email:'public1@gmail.com',
+        active: true,
     },{
         id:2,
         username : 'rnthd2',
-        email:'public2@gmail.com'
+        email:'public2@gmail.com',
+        active: false,
     },{
         id:3,
         username : 'rnthd3',
-        email:'public3@gmail.com'
+        email:'public3@gmail.com',
+        active: false,
     }
   ]);
 
@@ -68,6 +71,16 @@ function App() {
     setUsers(users.filter(user => user.id !== id));
   }
 
+  //배열에 있는 특정 item만 업데이트 할 때에도 map을 사용한다
+  //id값을 비교해 spread로 기존값을 복사하고 active값만 토글한다
+  const onToggle = id => {
+    setUsers(users.map(
+      user => user.id === id
+       ? {...user, active: !user.active}
+       : user
+    ))
+  }
+
   return (
     <>
     <CreateUser 
@@ -78,7 +91,8 @@ function App() {
     />
     <UserList 
       users={users}
-      onRemove={onRemove}/>
+      onRemove={onRemove}
+      onToggle={onToggle}/>
     </>
   )
 

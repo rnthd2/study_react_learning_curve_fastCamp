@@ -37,8 +37,6 @@ function App() {
     }
   ]);
 
-
-
   //useState로 사용하는 경우 해당 값이 리랜더링 되는데 
   //굳이 그럴 필요가 없을 때, useRef로 해도됨~
   const nextId = useRef(4);
@@ -64,6 +62,10 @@ function App() {
     }); 
     console.log(nextId.current);  //4
     nextId.current += 1;  //컴포넌트가 리랜더링 되지 않는다
+  };
+
+  const onRemove = id => {
+    setUsers(users.filter(user => user.id !== id));
   }
 
   return (
@@ -74,7 +76,9 @@ function App() {
       onChange={onChange} 
       onCreate={onCreate}
     />
-    <UserList users={users}/>
+    <UserList 
+      users={users}
+      onRemove={onRemove}/>
     </>
   )
 

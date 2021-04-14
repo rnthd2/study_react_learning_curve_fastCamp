@@ -1,10 +1,21 @@
-import React, {useEffect}from 'react';
+import React, {
+    // useEffect
+}from 'react';
 function User({user, onRemove, onToggle}){
     const {username, email, id, active} = user;
 
-    useEffect(() => {
-        console.log(user); 
-    });
+    //화면 전환 시에도 useEffect가 사용된다
+    // urlSlug(url에서 바뀌는 url "www.naver.com/home 에서 /home 부분")
+    // useEffect(() => {
+    //     loadPost(username, urlSlug); 
+    // }, [username, urlSlug]);
+
+    //리액트에서는 부모 컴포넌트가 리랜더링되면 자식 컴포넌트도 리랜더링 된다
+    //User 컴포넌트의 부모 컴포넌트 UserList의 user값이 변하게 되면 
+    //User 컴포넌트도 리랜더링 된다
+    // useEffect(() => {
+    //     console.log(user); 
+    // });
 
     //     console.log('user 값이 설정됨');
     //     console.log(user);

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useMemo} from 'react';
 import CreateUser from './CreateUser';
 import UserList from './UserList';
 // import InputSample from './InputSample';
@@ -6,7 +6,10 @@ import UserList from './UserList';
 // import Counter from './Counter';
 // import Wrapper from './Wrapper';
 // import './App.css';
-
+function countActiveUsers(users){
+  console.log('활성 사용자 수를 세는중...');
+  return users.filter(user => user.active).length; 
+}
 function App() {
   const [inputs, setInputs] = useState({
     username:'',
@@ -80,19 +83,23 @@ function App() {
        : user
     ))
   }
+  
+  //해당 함수의 기능을 할 때만 해당 함수를 사용하고 싶을 때, useMemo를 사용한다
+  const count = useMemo(() => countActiveUsers(users), [users]);
 
   return (
     <>
-    <CreateUser 
-      username={username} 
-      email={email} 
-      onChange={onChange} 
-      onCreate={onCreate}
-    />
-    <UserList 
-      users={users}
-      onRemove={onRemove}
-      onToggle={onToggle}/>
+      <CreateUser 
+        username={username} 
+        email={email} 
+        onChange={onChange} 
+        onCreate={onCreate}
+      />
+      <UserList 
+        users={users}
+        onRemove={onRemove}
+        onToggle={onToggle}/>
+      <div>활성 사용자 수 : {count}</div>
     </>
   )
 

@@ -63,7 +63,7 @@ function App() {
       username: '',
       email:'',
     }); 
-    console.log(nextId.current);  //4
+    // console.log(nextId.current);  //4
     nextId.current += 1;  //컴포넌트가 리랜더링 되지 않는다
   };
 

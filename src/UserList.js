@@ -1,6 +1,37 @@
-import React from 'react';
+import React, {useEffect}from 'react';
 function User({user, onRemove, onToggle}){
     const {username, email, id, active} = user;
+
+    useEffect(() => {
+        console.log(user); 
+    });
+
+    //     console.log('user 값이 설정됨');
+    //     console.log(user);
+    //     return () => {
+    //         console.log('user 값이 바뀌기 전');
+    //         console.log(user);
+    //     }
+    // }, [user]
+    // );
+
+    // //mount(실행 화면에 나올 때)
+    //     //mount를 사용하는 경우는?
+    //     //1.props로 받은 값을 state로 설정
+    //     //2.REST API 요청 시
+    //     //3.라이브러리 사용 시
+    //     //4.setInterval, setTimeout
+    // useEffect(() => {
+    //     console.log('컴포넌트가 화면에 나타남');
+
+    //     //unmount(실행 화면에서 사라졌을 때)
+    //         //unmount를 사용하는 경우는?
+    //         //1.clearInterval, clearTimeout
+    //         //2.라이브러리 인스턴스 제거 시
+    //     return () => {
+    //         console.log('컴포넌트가 화면에서 사라짐');
+    //     }
+    // }, []);
     return(
         <div>
             <b          

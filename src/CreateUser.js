@@ -19,4 +19,6 @@ function CreateUser({username, email, onChange, onCreate}){
         </div>
     );
 } 
-export default CreateUser;
+//React.memo 사용 시 props가 바뀌었을때만 랜더링됨
+export default React.memo(CreateUser);
+// export default CreateUser;

@@ -1,7 +1,8 @@
 import React, {
     // useEffect
 }from 'react';
-function User({user, onRemove, onToggle}){
+const User = React.memo(function User({user, onRemove, onToggle}){
+// function User({user, onRemove, onToggle}){
     const {username, email, id, active} = user;
 
     //화면 전환 시에도 useEffect가 사용된다
@@ -63,7 +64,8 @@ function User({user, onRemove, onToggle}){
             <button onClick={() => onRemove(id)}>삭제</button>
         </div>
     );
-}
+});
+// };
 function UserList({users, onRemove, onToggle}){
     return (
         <div>
@@ -96,4 +98,8 @@ function UserList({users, onRemove, onToggle}){
         </div>
     )
 }
-export default UserList;
+//React.memo 사용 시 props가 바뀌었을때만 랜더링됨
+export default React.memo(UserList, 
+    (preProps, nextProps) => nextProps.users === preProps.users
+);
+// export default UserList;

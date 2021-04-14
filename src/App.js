@@ -56,8 +56,8 @@ function App() {
   const onCreate = useCallback(() => {
     const user = {
       id: nextId.current,
-      ...inputs
-      //username, email
+      // ...inputs
+      username, email
     };
 
     //배열에서 spread 연산자를 사용해보자
@@ -65,7 +65,9 @@ function App() {
     //   ...users, 
     //   user
     // ]);
-    setUsers(users.concat(user));
+    //users 함수의 파라미터에서 최신 users를 조회하기 때문에 
+    //굳이 useCallback에 depth에 users를 참조하지 않아도 된다
+    setUsers(users => users.concat(user));
      
     setInputs({
       username: '',
@@ -73,21 +75,21 @@ function App() {
     }); 
     // console.log(nextId.current);  //4
     nextId.current += 1;  //컴포넌트가 리랜더링 되지 않는다
-  }, [inputs, users]);
+  }, [username, email]);
 
   const onRemove = useCallback(id => {
-    setUsers(users.filter(user => user.id !== id));
-  }, [users]);
+    setUsers(users => users.filter(user => user.id !== id));
+  }, []);
 
   //배열에 있는 특정 item만 업데이트 할 때에도 map을 사용한다
   //id값을 비교해 spread로 기존값을 복사하고 active값만 토글한다
   const onToggle = useCallback(id => {
-    setUsers(users.map(
+    setUsers(users => users.map(
       user => user.id === id
        ? {...user, active: !user.active}
        : user
     ))
-  }, [users]);
+  }, []);
   
   //해당 함수의 기능을 할 때만 해당 함수를 사용하고 싶을 때, useMemo를 사용한다
   const count = useMemo(() => countActiveUsers(users), [users]);
@@ -145,5 +147,5 @@ function App() {
   //   </>
   // );
 }
-
+//React.memo 사용 시  props가 바뀌었을때만 랜더링됨
 export default App;
